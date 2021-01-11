@@ -1,0 +1,3 @@
+variable policies {
+  type = list
+}
