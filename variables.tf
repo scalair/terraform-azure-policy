@@ -1,3 +1,3 @@
 variable policies {
-  type = list
+  type = map
 }

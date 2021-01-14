@@ -1,10 +1,10 @@
 resource "azurerm_policy_definition" "this" {
   for_each = {
-    for i, p in var.policies : i => p
-    if p.policy_type == "Custom"
+    for k, v in var.policies : k => v
+    if v.policy_type == "Custom"
   }
 
-  name                  = each.value.name
+  name                  = each.key
   display_name          = each.value.display_name
   description           = lookup(each.value, "description", null)
   policy_type           = lookup(each.value, "policy_type")
@@ -20,9 +20,9 @@ resource "azurerm_policy_definition" "this" {
 }
 
 resource "azurerm_policy_assignment" "this" {
-  for_each = { for i, p in var.policies : i => p }
+  for_each = var.policies
 
-  name                 = each.value.name
+  name                 = each.key
   display_name         = each.value.display_name
   scope                = each.value.scope
   policy_definition_id = lookup(each.value, "policy_type", null) == "Custom" ? azurerm_policy_definition.this[each.key].id : lookup(each.value, "policy_definition_id", null)
