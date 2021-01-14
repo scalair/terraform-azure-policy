@@ -8,9 +8,8 @@ This module creates Azure Policies definitions and their attachments.
 module "az_policy" {
   source = "github.com/scalair/terraform-azure-policy"
 
-  policies = [
-    {
-      name         = "naming-resource-groups"
+  policies = {
+    naming-resource-groups = {
       display_name = "Resource Group Name Constraints"
       policy_type  = "Custom"
       mode         = "Indexed"
@@ -22,7 +21,7 @@ module "az_policy" {
       scope = "/subscriptions/${get_env("ARM_SUBSCRIPTION_ID")}"
 
     }
-  ]
+  }
 }
 ```
 
