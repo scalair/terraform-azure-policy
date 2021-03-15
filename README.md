@@ -1,4 +1,4 @@
-# Teraform Azure Policies
+# Terraform Azure Policies
 
 This module creates Azure Policies definitions and their attachments.
 
